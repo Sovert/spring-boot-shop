@@ -1,4 +1,4 @@
-package com.qch.login;
+package com.qch.shop;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

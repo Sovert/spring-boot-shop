@@ -1,7 +1,7 @@
-package com.qch.login.repository;
+package com.qch.shop.repository;
 
-import com.qch.login.entity.UserInfo;
-import com.qch.login.entity.UserRole;
+import com.qch.shop.entity.UserInfo;
+import com.qch.shop.entity.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

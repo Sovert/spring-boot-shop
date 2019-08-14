@@ -1,8 +1,6 @@
-package com.qch.login.config;
+package com.qch.shop.config;
 
-import com.qch.login.service.UserInfoService;
-import com.qch.login.service.impl.UserInfoServiceImpl;
-import org.springframework.context.annotation.Bean;
+import com.qch.shop.service.UserInfoService;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

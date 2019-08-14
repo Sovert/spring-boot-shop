@@ -1,8 +1,7 @@
-package com.qch.login.service.impl;
+package com.qch.shop.service.impl;
 
-import com.qch.login.entity.UserInfo;
-import com.qch.login.repository.UserInfoRepository;
-import com.qch.login.service.UserInfoService;
+import com.qch.shop.entity.UserInfo;
+import com.qch.shop.repository.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

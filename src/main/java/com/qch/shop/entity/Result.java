@@ -1,6 +1,6 @@
-package com.qch.login.entity;
+package com.qch.shop.entity;
 
-import com.qch.login.constant.StatusConstant;
+import com.qch.shop.constant.StatusConstant;
 
 public class Result {
 

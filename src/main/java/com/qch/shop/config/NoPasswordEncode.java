@@ -1,4 +1,4 @@
-package com.qch.login.config;
+package com.qch.shop.config;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 

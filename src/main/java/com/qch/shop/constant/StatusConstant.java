@@ -1,4 +1,4 @@
-package com.qch.login.constant;
+package com.qch.shop.constant;
 
 public class StatusConstant {
 

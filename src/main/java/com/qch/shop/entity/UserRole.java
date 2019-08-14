@@ -1,4 +1,4 @@
-package com.qch.login.entity;
+package com.qch.shop.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
