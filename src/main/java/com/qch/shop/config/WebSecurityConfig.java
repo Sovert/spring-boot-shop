@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                // .antMatchers("/user/**").hasRole("USER")
                // .antMatchers("/business/**").hasRole("BUSINESS")
                 .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/user")
+                .formLogin().loginPage("/login").loginProcessingUrl("/user/login").defaultSuccessUrl("/user")
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/login")
                 .and().csrf().disable();

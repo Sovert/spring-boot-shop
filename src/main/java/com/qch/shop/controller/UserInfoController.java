@@ -3,10 +3,13 @@ package com.qch.shop.controller;
 import com.qch.shop.entity.Result;
 import com.qch.shop.entity.UserInfo;
 import com.qch.shop.service.UserInfoService;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 @RestController
 @RequestMapping("/user")
@@ -25,8 +28,12 @@ public class UserInfoController {
         if(userInfoService.existsByUsername(user.getUsername())) {
             return Result.error("用户已存在");
         }
-        Thread.sleep(2000);
-        userInfoService.insert(user);
+        try {
+            userInfoService.insert(user);
+        } catch (DataIntegrityViolationException exception) {
+            return Result.error("用户已存在");
+        }
+
         return Result.ok();
     }
 }

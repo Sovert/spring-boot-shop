@@ -6,6 +6,8 @@ import com.qch.shop.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 @Service
 public class UserInfoServiceImpl implements UserInfoService{
 
