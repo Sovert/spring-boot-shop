@@ -18,11 +18,6 @@ public class UserInfoController {
     @Resource
     private UserInfoService userInfoService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
-        return "login";
-    }
-
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Result doRegister(@RequestBody @Valid UserInfo user) throws InterruptedException {
         if(userInfoService.existsByUsername(user.getUsername())) {
