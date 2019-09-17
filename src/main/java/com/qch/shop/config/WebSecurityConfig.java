@@ -2,8 +2,10 @@ package com.qch.shop.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qch.shop.entity.Result;
+import com.qch.shop.entity.UserInfo;
 import com.qch.shop.filter.CustomAuthenticationFilter;
 import com.qch.shop.service.UserInfoService;
+import com.qch.shop.util.LoginUserUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,6 +14,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -25,6 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -40,9 +47,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.authorizeRequests()
                 .antMatchers("/**").permitAll()
                 .and().formLogin()
-                .and().logout().logoutUrl("user/logout")
+                .and().logout().logoutUrl("/user/logout")
+                .logoutSuccessHandler((request,response,authentication) -> {
+                    response.setContentType("application/json;charset=utf-8");
+                    PrintWriter out = response.getWriter();
+                    out.write(new ObjectMapper().writeValueAsString(Result.ok()));
+                    out.flush();
+                    out.close();
+                })
                .and().csrf().disable();
-
         httpSecurity.addFilterAt(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
@@ -60,7 +73,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setAuthenticationSuccessHandler((req, resp, authentication) -> {
             resp.setContentType("application/json;charset=utf-8");
             PrintWriter out = resp.getWriter();
-            Result result = Result.ok("登录成功!");
+
+            Result result = Result.ok("登录成功!", LoginUserUtil.getInfo());
             out.write(new ObjectMapper().writeValueAsString(result));
             out.flush();
             out.close();

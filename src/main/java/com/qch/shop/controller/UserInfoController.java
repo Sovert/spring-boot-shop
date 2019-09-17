@@ -3,7 +3,10 @@ package com.qch.shop.controller;
 import com.qch.shop.entity.Result;
 import com.qch.shop.entity.UserInfo;
 import com.qch.shop.service.UserInfoService;
+import com.qch.shop.util.LoginUserUtil;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -30,5 +33,10 @@ public class UserInfoController {
         }
 
         return Result.ok();
+    }
+
+    @RequestMapping(value = "/info")
+    public Result info(){
+        return Result.ok("", LoginUserUtil.getInfo());
     }
 }
